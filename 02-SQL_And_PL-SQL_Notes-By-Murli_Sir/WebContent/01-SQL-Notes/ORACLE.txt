@@ -1,0 +1,19 @@
+select * from emp;
+ select instr('ABCDEFGHCDKMNCDSBN','CD',-6,2)from dual;
+create table shams(mailid varchar2(20));
+prakash@gmail.com'
+ select * from shams where instr(mailid,'@')>0 and instr(mailid,'  ')=0;
+select ltrim('SSMISSTHSS','S')from dual;
+select job,ltrim(job,'CMS')from emp;
+ select rtrim('SSMISSTHSS','S')from dual;
+select trim('S'from'SSMISSTHSS')from dual;
+select trim(ledding 'S' from 'SSMISSTHSS')from dual;
+select trim(trailing 'S' from 'SSMISSTHSS')from dual;
+
+
+ insert into city(name, id, countrycode, district, population, job)
+ values ('shamshad', '01', '804402', 'arwal', '6666', 'kuc v');
+
+
+ insert into school(id,name,class,marks,sex)
+values('10','Big John','4','48','female');

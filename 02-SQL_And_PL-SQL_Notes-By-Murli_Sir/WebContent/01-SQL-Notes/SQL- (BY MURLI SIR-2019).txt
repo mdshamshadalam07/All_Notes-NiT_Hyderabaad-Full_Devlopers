@@ -1,0 +1,306 @@
+   Date:- 20-10-2019
+ ================
+* Role :->   Role is noting but set of system privileges oracle having two type of roles these are.
+=======      (1) User defined Roles.
+                       (2) Predefined Roles.
+
+(1) User defined Roles :->   ---->User defined roles are create by database administator only.
+  ==================   ----> Generally in multi-user enviroment so many employees working in same project in this case same employee
+                                                         common set of privileges in this case only database administator created role and then assigns common setup 
+                                                         system privileges new row and then only these rows given to the no of users.
+                                                                                                                                                                                                             (3)
+                                                                                                                                                                                                       ---------> user1
+                                     (2)                                                                                 (1)                                                                 ----------> user2
+                         System privileges---------------------------------------------->Role-------------------------------------------> -------> user3
+                        ============| =>)                                                                                                                                    ----------> user4
+                                                                                                                                                                                                 -------------> user5
+            ----> In oracle user defined roles are created by using three steps process.
+Step 1:-> Create a role.
+--------      -----------------
+Syntax :->   create Role rolename;
+-----------
+
+Step 2:-> Assign System privileges into role.
+---------    -------------------------------------------
+Syntax :->  grant system privileges to rolename;
+----------
+
+Step 3:-> Assign role name to number of users.
+---------     ----------------------------------------------
+Syntax :->  grant rolename to username1,username2.....................;
+
+Example :->
+---------------
+SQL> conn sys as sysdba;
+Enter password: sys
+Connected.
+
+SQL> grant create procedure,create trigger,create any view to r1;
+Grant succeeded. 
+
+SQL> create role r1;
+Role created.
+
+SQL> grant r1 to scott,sys;
+Grant succeeded.
+
+----> In oracle if you want to views system privileges related to role then we are using role_sys_privs data dictionary.
+
+SQL> desc role_sys_privs;
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLE                                      NOT NULL VARCHAR2(30)
+ PRIVILEGE                                 NOT NULL VARCHAR2(40)
+ ADMIN_OPTION                                       VARCHAR2(3)
+
+SQL> select role privilege from role_sys_privs where role='R1';
+
+Role                                                                                              PRIVILEGE
+------------------------------                                                       -----------------------
+R1                                                                                            CREATE TRIGGER
+R1                                                                                            CREATE  PROCEDURE
+R1                                                                                            CREATE ANY VIEWS
+
+(2) Predefined Roles :->  When ever we are installing oracle sever than automatically three predefined roles are created with in oracle 
+  ----------------------------   database these are.
+                                            (1) Connect (end user)
+                                            (2) Resource (developer)            
+                                            (3) dba (administrator)
+
+-----> In oracle if you want to views these predefined roles also then use are using role_sys_privs data dictionary.
+
+-----> In oracle connect role enternally having create system device which is use to users are allowed to connect the oracle database.    
+
+SQL> conn sys as sysdba;
+Enter password: ***
+Connected.
+
+SQL> select role privilege from role_sys_privs where role in('CONNET','RESOURCE');
+
+ ROLE                                                                                                      PRIVILEGE
+------------------------------                                                                   --------------------------
+RESOURCE                                                                                       CREATE SEQUENCE
+RESOURCE                                                                                       CREATE TRIGGER
+RESOURCE                                                                                       CREATE CLUSTER
+RESOURCE                                                                                       CREATE PROCEDURE
+RESOURCE                                                                                       CREATE TYPE
+RESOURCE                                                                                       CREATE SESSION
+RESOURCE                                                                                       CREATE OPERATOR
+RESOURCE                                                                                       CREATE TABLE
+RESOURCE                                                                                       CREATE INDEXTYPE
+
+SQL> select role,privilege from role_sys_privs where role in('DBA');
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE SESSION
+DBA                            ALTER SESSION
+DBA                            DROP TABLESPACE
+DBA                            BECOME USER
+DBA                            DROP ROLLBACK SEGMENT
+DBA                            SELECT ANY TABLE
+DBA                            INSERT ANY TABLE
+DBA                            UPDATE ANY TABLE
+DBA                            DROP ANY INDEX
+DBA                            SELECT ANY SEQUENCE
+DBA                            CREATE ROLE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            EXECUTE ANY PROCEDURE
+DBA                            ALTER PROFILE
+DBA                            CREATE ANY DIRECTORY
+DBA                            CREATE ANY LIBRARY
+DBA                            EXECUTE ANY LIBRARY
+DBA                            ALTER ANY INDEXTYPE
+DBA                            DROP ANY INDEXTYPE
+DBA                            DEQUEUE ANY QUEUE
+DBA                            EXECUTE ANY EVALUATION CONTEXT
+DBA                            EXPORT FULL DATABASE
+DBA                            CREATE RULE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            ALTER ANY SQL PROFILE
+DBA                            ADMINISTER ANY SQL TUNING SET
+DBA                            CHANGE NOTIFICATION
+DBA                            ALTER ROLLBACK SEGMENT
+DBA                            DELETE ANY TABLE
+DBA                            ALTER DATABASE
+DBA                            FORCE ANY TRANSACTION
+DBA                            ALTER ANY PROCEDURE
+DBA                            DROP ANY TRIGGER
+DBA                            DROP ANY MATERIALIZED VIEW
+DBA                            UNDER ANY TYPE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            ALTER ANY LIBRARY
+DBA                            CREATE DIMENSION
+DBA                            DEBUG ANY PROCEDURE
+DBA                            CREATE RULE SET
+DBA                            ALTER ANY RULE SET
+DBA                            ANALYZE ANY DICTIONARY
+DBA                            RESTRICTED SESSION
+DBA                            CREATE TABLESPACE
+DBA                            ALTER TABLESPACE
+DBA                            CREATE USER
+DBA                            ALTER USER
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            LOCK ANY TABLE
+DBA                            CREATE VIEW
+DBA                            DROP ANY VIEW
+DBA                            GRANT ANY ROLE
+DBA                            CREATE TRIGGER
+DBA                            CREATE TYPE
+DBA                            EXECUTE ANY OPERATOR
+DBA                            CREATE ANY DIMENSION
+DBA                            ALTER ANY DIMENSION
+DBA                            CREATE ANY OUTLINE
+DBA                            ADMINISTER DATABASE TRIGGER
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            RESUMABLE
+DBA                            FLASHBACK ANY TABLE
+DBA                            CREATE ANY RULE SET
+DBA                            EXECUTE ANY RULE SET
+DBA                            IMPORT FULL DATABASE
+DBA                            EXECUTE ANY RULE
+DBA                            EXECUTE ANY PROGRAM
+DBA                            CREATE ANY TABLE
+DBA                            CREATE ANY INDEX
+DBA                            CREATE ANY SEQUENCE
+DBA                            ALTER ANY ROLE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            ANALYZE ANY
+DBA                            DROP ANY LIBRARY
+DBA                            CREATE ANY OPERATOR
+DBA                            CREATE INDEXTYPE
+DBA                            UNDER ANY TABLE
+DBA                            DROP ANY DIMENSION
+DBA                            SELECT ANY DICTIONARY
+DBA                            GRANT ANY OBJECT PRIVILEGE
+DBA                            CREATE EVALUATION CONTEXT
+DBA                            CREATE ANY EVALUATION CONTEXT
+DBA                            DROP ANY EVALUATION CONTEXT
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE ANY RULE
+DBA                            CREATE JOB
+DBA                            CREATE ANY JOB
+DBA                            ALTER SYSTEM
+DBA                            AUDIT SYSTEM
+DBA                            CREATE ROLLBACK SEGMENT
+DBA                            DROP ANY TABLE
+DBA                            COMMENT ANY TABLE
+DBA                            CREATE CLUSTER
+DBA                            ALTER ANY INDEX
+DBA                            DROP PUBLIC DATABASE LINK
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE PROFILE
+DBA                            ALTER ANY MATERIALIZED VIEW
+DBA                            ALTER ANY TYPE
+DBA                            DROP ANY TYPE
+DBA                            UNDER ANY VIEW
+DBA                            EXECUTE ANY INDEXTYPE
+DBA                            DROP ANY CONTEXT
+DBA                            ALTER ANY OUTLINE
+DBA                            ADMINISTER RESOURCE MANAGER
+DBA                            MANAGE SCHEDULER
+DBA                            MANAGE FILE GROUP
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE TABLE
+DBA                            BACKUP ANY TABLE
+DBA                            CREATE ANY CLUSTER
+DBA                            DROP ANY SYNONYM
+DBA                            DROP PUBLIC SYNONYM
+DBA                            CREATE ANY VIEW
+DBA                            CREATE SEQUENCE
+DBA                            ALTER ANY SEQUENCE
+DBA                            FORCE TRANSACTION
+DBA                            CREATE PROCEDURE
+DBA                            CREATE ANY PROCEDURE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            ALTER RESOURCE COST
+DBA                            DROP ANY DIRECTORY
+DBA                            CREATE ANY TYPE
+DBA                            CREATE ANY INDEXTYPE
+DBA                            ENQUEUE ANY QUEUE
+DBA                            ON COMMIT REFRESH
+DBA                            DEBUG CONNECT SESSION
+DBA                            DROP ANY RULE SET
+DBA                            EXECUTE ANY CLASS
+DBA                            MANAGE ANY FILE GROUP
+DBA                            ALTER ANY TABLE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            DROP ANY CLUSTER
+DBA                            CREATE SYNONYM
+DBA                            CREATE PUBLIC SYNONYM
+DBA                            DROP ANY SEQUENCE
+DBA                            DROP ANY ROLE
+DBA                            AUDIT ANY
+DBA                            DROP ANY PROCEDURE
+DBA                            CREATE ANY TRIGGER
+DBA                            ALTER ANY TRIGGER
+DBA                            DROP PROFILE
+DBA                            GRANT ANY PRIVILEGE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE LIBRARY
+DBA                            CREATE OPERATOR
+DBA                            DROP ANY OUTLINE
+DBA                            MERGE ANY VIEW
+DBA                            ADMINISTER SQL TUNING SET
+DBA                            MANAGE TABLESPACE
+DBA                            DROP USER
+DBA                            ALTER ANY CLUSTER
+DBA                            CREATE ANY SYNONYM
+DBA                            CREATE DATABASE LINK
+DBA                            CREATE PUBLIC DATABASE LINK
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            CREATE MATERIALIZED VIEW
+DBA                            CREATE ANY MATERIALIZED VIEW
+DBA                            EXECUTE ANY TYPE
+DBA                            DROP ANY OPERATOR
+DBA                            QUERY REWRITE
+DBA                            GLOBAL QUERY REWRITE
+DBA                            MANAGE ANY QUEUE
+DBA                            CREATE ANY CONTEXT
+DBA                            ALTER ANY EVALUATION CONTEXT
+DBA                            ALTER ANY RULE
+DBA                            DROP ANY RULE
+
+ROLE                           PRIVILEGE
+------------------------------ ----------------------------------------
+DBA                            ADVISOR
+DBA                            SELECT ANY TRANSACTION
+DBA                            DROP ANY SQL PROFILE
+DBA                            CREATE ANY SQL PROFILE
+DBA                            READ ANY FILE GROUP
+DBA                            CREATE EXTERNAL JOB
+
+160 rows selected.
+
+
+Date:->  13-12-2019
+----------------------------
+                                               ******** BULK BIND *****
+                                                          ===========
