@@ -1,0 +1,142 @@
+Start Running any project
+	there is a chance project execution may terminated abnormally
+		It is due wrong logic or due to wrong inputs
+
+	Problems 
+		1) already entered values are lose
+		2) deducted money lose
+
+	Ex: paytm --> mobile recharge
+		1) 
+		2) 
+		3) 
+		4) 
+		5) n/w problem mobile server is not avaiable
+
+		Must hold program termination
+		  and save the values 
+		 and allow to terminate
+
+	to do so, we must use EH
+
+
+	try
+	catch
+	finally
+
+	throw
+	throws
+
+What is an exception when will we get an exception?
+=======================================
+	Excception is an object which is an instance of Throwable or one of its sub classes
+	It is meant for representing the runtime errors occured during program execution
+	due to either wrong logic or due to wrong inputs.
+
+	We have several exception classes for representing each runtime error separately.
+		1) class loading problem		--> NoClassDefFoundError/ClassNotFoundException
+		2) class format problem		--> LinkageErorr/ClassFormatError
+		3) method not found problem	--> NoSuchMethodError/NoSuchMethodError
+		4) method not found problem	--> NoSuchFieldError/NoSuchMethodError
+		5) recursive method call prob	--> StackOverflowError
+		6) heap memory probs		--> OutOfMemoryError(OOME)
+		7) native method link prob	--> UnsatisfiedLinkError
+		8) C and J version problems	--> UnsupportedClassVersionError
+
+		9) divide a integer by zero	---> ArithmeticException
+
+		10) array creation problems	---> NegativeArrySizeException	
+		11) index problems			---> IndexOutputOfBoundsException	
+		12) array index problems		---> ArrayIndexOutputOfBoundsException	
+		13) string index problems		---> StringIndexOutputOfBoundsException	
+		14) array storing problems	---> ArrayStoreException
+
+		15) type casting problems	---> ClassCastException
+		16) null pointer problems	---> NullPointerException
+		17) number converison probs	---> NumberFormatException
+		18) wrong argument	 prob	---> IllegalArgumentException
+		19) wrong initialization		---> IllegalStateException
+		20) abstrat method			---> AbstractMethodException
+
+		21) instantiation probs		---> InstantiationException
+		22) private member probs	---> IllegalAccessException
+		23) private member probs	---> 	SecurityException
+
+		24) cloning probs			---> CloneNotSupportedException
+
+		25) Thread starting probs	 	---> IllegalThreadStateException
+		26) sleeping probs			---> InterrutedException
+		27) locking probs			---> IllegalMonitorStateException
+
+		28) file problems			---> FileNotFoundException
+		29) file problems			---> IOException
+		30) file problems			---> EOFException
+		31) file problems			---> StreamCorruptedException
+
+		32) serialization problems	---> NotSerializableException
+		33) Deserialization problems	---> InvalidClassException
+
+		34) netwoking problems		---> SocketException
+		35) netwoking problems		---> BindException
+		36) netwoking problems		---> MalformedURLException
+		37) netwoking problems		---> ConnectException
+		38) netwoking problems		---> UnknownHostException
+		
+		39) method implementation	--> UnsupportedOperationException
+		40) fast fast problems		--> ConcurrentModificationException
+		41) iteration problems		--> NoSuchElementException
+		42) iteration problems		--> EmptyStackException
+		43) scanner problems		--> InputMismatchException
+
+		44) props file missing		--> MissingResourceException
+
+		45) window problems		--> AWTException
+
+		46) assertion probs			-->AssertionError
+		47) enum related			--> EnumConstantNotPresentException
+		
+		48) SB/NSB exe problems	--> ExceptionInInitializerError
+//------------------------------------------------------------------------------------------
+		49) jdbc problems			---> SQLException
+		50) jdbc problems			---> SQLSyntaxErrorException
+
+		51) servlet problems			---> ServletException
+		52) jsp problems			---> JspException
+//--------------------------------------------------------------------------------------------
+
+How can we solve exception?
+======================
+
+
+
+
+
+	runtime error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
